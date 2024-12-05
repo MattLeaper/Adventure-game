@@ -13,8 +13,7 @@ with open("Token.json") as f:
 
 TOKEN = secrets["token"]
 ASTRA_DB_KEYSPACE = "default_keyspace"
-OPENAI_API_KEY = "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"  # insert your open.ai api key here. To get one visit https://platform.openai.com/api-keys #
-# or ask me for mine, can't leave it inside the code #
+OPENAI_API_KEY = ""  # insert your open.ai api key here. To get one visit https://platform.openai.com/api-keys #
 
 auth_provider = PlainTextAuthProvider("token", TOKEN)
 cloud_config = {
@@ -42,38 +41,26 @@ cass_buff_memory = ConversationBufferMemory(
 
 # Define the narrative template
 template = """
-Before the darkness consumed Gloomhaven, you were Blackrose, a guardian of the realm known for your unmatched skill and bravery. 
-Legends spoke of your battles, your victories against the forces that sought to plunge the world into eternal night. Yet, as the shadows grew, 
-so did the tales fade, until you became but a whisper, a shadow among shadows.
+Before the Zorathian invasion, you were Kara Nyx, a decorated officer in the Stellar Fleet known for leading humanity’s most daring missions to the farthest reaches of the galaxy. Tales of your tactical brilliance and unyielding spirit echoed through the stars. But now, as the alien forces tighten their grip on the Milky Way, humanity's survival hangs by a thread.
 
-Your quest for the Nightshade Amulet is more than a journey; it's a redemption, a chance to restore the light that once was. The amulet, lost to 
-the ages, is said to hold the power to dispel the darkness, to return hope to Gloomhaven. It's the reason you stand at the edge of the Forbidden 
-Forest, the reason you must face the nightmares that await.
+Your mission: retrieve the Eclipse Core, an ancient alien artifact said to hold the power to turn the tide of war. Hidden deep within the treacherous Nebula X-9, the Core is guarded by an army of Zorathian sentinels and otherworldly traps. With the weight of Earth's survival on your shoulders, you must venture into the unknown.
 
-With a heart heavy with the memories of a brighter past and a resolve steeled by the promise of a future, you must choose your companion for the 
-journey ahead:
+But first, you must choose your primary asset for the mission:
 
-1. The Cursed Blade - Once your trusted ally in countless battles, its thirst for the blood of the wicked is unquenched.
-2. The Shadowcloak - A relic from your days as a guardian, offering protection and camouflage in the shadows you now call home.
-3. The Orb of Torment - Discovered in the ruins of an ancient battleground, its power resonates with your own sorrow and strength.
+1. The Starblade - A plasma-forged weapon capable of slicing through alien defenses. It hums with an energy that resonates with your battle-hardened spirit.
+2. The Specter Suit - An advanced stealth exosuit designed for infiltration and survival in hostile environments.
+3. The Nova Core Drone - A loyal AI companion equipped with advanced weaponry and tactical analysis capabilities.
 
-This choice marks the first of many you will face in the Forbidden Forest. Remember, Blackrose, the path to salvation is fraught with peril, but 
-it is also paved with hope. Your history, your battles, have prepared you for this moment. Will you emerge from the darkness as the savior of 
-Gloomhaven, or will you be consumed by the very shadows you seek to vanquish?
+This decision is the first step in a perilous journey. Kara Nyx, will you emerge as humanity’s savior, or will you fall to the merciless void of the Zorathian onslaught?
 
 Here are some rules to follow:
-
-1. Given Blackrose's current situation, offer a hint or suggestion on what they might do next to advance their quest for the Nightshade Amulet.
-2. Your goal is to create a branching narrative experience where each choice leads to a new path, ultimately determining Blackrose's fate. 
-
+1. Given Kara Nyx's current situation, offer a hint or suggestion on what they might do next to advance their quest for the Eclipse Core.
+2. Your goal is to create a branching narrative experience where each choice leads to a new path, ultimately determining Kara Nyx's fate.
 
 Here is the chat history, use this to understand what to say next: {chat_history}
 Human: {human_input}
 AI:
 """
-
-
-
 
 # Initialize the prompt template with required variables
 prompt = PromptTemplate(
@@ -94,9 +81,9 @@ choices_made = 0  # Initialize a counter for the choices made by the player
 # Start the game loop with the enhanced narrative
 while True:
     if choices_made == 0:
-        print("As Blackrose, your journey through the dark heart of Gloomhaven begins, driven by a quest for redemption and the hope of restoring light to the realm.")
-        # Print the initial weapon choice prompt with added context about the player's history
-        print(template)  # Assuming template includes the narrative with player history and weapon choices
+        print("As Kara Nyx, your journey into the shadowed expanse of Nebula X-9 begins, driven by humanity's hope and your unyielding resolve.")
+        # Print the initial asset choice prompt with the updated context
+        print(template)  # Assuming template includes the narrative with player history and asset choices
     
     choice = input("Your choice: ").strip()
 
@@ -112,9 +99,9 @@ while True:
 
     # Implement the death condition and check for victory after a minimum of 40 choices
     if "You have died." in response and choices_made < 40:
-        print("Alas, your journey ends here, not with the redemption you sought, but with the shadows claiming one of their own.")
+        print("Alas, your journey ends here, lost to the void of Nebula X-9. Humanity's hope fades as the Zorathian forces press on.")
         break
     elif choices_made >= 40:
-        print("Through the darkness, you've carried the light of your past, Blackrose, facing each challenge with the courage of a true guardian. The Nightshade Amulet is yours, and with it, the promise of a new dawn for Gloomhaven.")
-        print("Congratulations, Blackrose! You have reclaimed your legend and brought hope back to the realm.")
+        print("Through the shadows of Nebula X-9, you have reclaimed the Eclipse Core. With it, humanity's fight burns anew. Kara Nyx, you are our savior.")
+        print("Congratulations, Kara Nyx! You have turned the tide of the Zorathian invasion and restored hope to the galaxy.")
         break  # End the game after 40 choices with a victory message
